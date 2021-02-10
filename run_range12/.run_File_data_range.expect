@@ -1,0 +1,12 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NOANGLE $env(NOANGLE)
+set ENERGY $env(ENERGY)
+set DIR $env(DIR)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/workspace/plot\n"
+send "root -l Shower_iFile_range.C'(\"$DIR\")'\n"
+send ".q\n"
+send "exit\n"
+interact

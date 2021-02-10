@@ -1,0 +1,15 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NOANGLE $env(NOANGLE)
+set ENERGY $env(ENERGY)
+set STR $env(STR)
+set WORK_DATA_PATH $env(WORK_DATA_PATH)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/run/run_sim_pi0\n"
+send "root -l MY_sim_complete_Pi0.C'($NOANGLE, $ENERGY, \"$STR\")'\n"
+send ".q\n"
+send "root -l MY_digi_complete_Pi0.C'(0,\"$WORK_DATA_PATH\")'\n"
+send ".q\n"
+send "exit\n"
+interact

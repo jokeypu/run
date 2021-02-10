@@ -1,0 +1,15 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NGAMMA $env(NGAMMA)
+set NOANGLE $env(NOANGLE)
+set ENERGY $env(ENERGY)
+set WORK_DATA_PATH $env(WORK_DATA_PATH)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/run/\n"
+send "root -l MY_sim_complete_new.C\"($NGAMMA, $NOANGLE, $ENERGY)\"\n"
+send ".q\n"
+send "root -l digi_complete.C'(0,\"$WORK_DATA_PATH\")'\n"
+send ".q\n"
+send "exit\n"
+interact

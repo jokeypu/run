@@ -1,0 +1,12 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NGAMMA $env(NGAMMA)
+set NOANGLE $env(NOANGLE)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/workspace/plot\n"
+send "root -l Fit_Read_Par_one.C'($NOANGLE)'\n"
+send "sleep(2)\n"
+send ".q\n"
+send "exit\n"
+interact

@@ -1,0 +1,11 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set WORK_DATA_PATH $env(WORK_DATA_PATH)
+set C_NAME $env(C_NAME)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/run/$C_NAME\n"
+send "root -l MY_digi_complete_two.C'(0, \"$WORK_DATA_PATH\")'\n"
+send ".q\n"
+send "exit\n"
+interact

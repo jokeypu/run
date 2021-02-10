@@ -1,0 +1,24 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NGAMMA $env(NGAMMA)
+set NOANGLE $env(NOANGLE)
+set ENERGY $env(ENERGY)
+set DIR $env(DIR)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/workspace/plot\n"
+
+send "root -l File_Productor_cp.C'(\"$DIR\")'\n"
+#send "root -l File_Productor.C'(\"$DIR\")'\n"
+send ".q\n"
+
+send "root -l File_Process.C'(\"$DIR\")'\n"
+send ".q\n"
+
+#send "root -l Fit_DigiEnergy_cp.C'(\"$DIR\",\"doc/${DIR}_R.txt\",$NOANGLE,$ENERGY)'\n"
+send "root -l Fit_DigiEnergy_cp.C'(\"$DIR\",\"doc/${DIR}.txt\",$NOANGLE,$ENERGY)'\n"
+#send "sleep(2)\n"
+send ".q\n"
+
+send "exit\n"
+interact

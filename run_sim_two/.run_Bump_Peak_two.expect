@@ -1,0 +1,15 @@
+set timeout -1
+set PANDA_DIR $env(PANDA_DIR)
+set NGAMMA $env(NGAMMA)
+set NOANGLE $env(NOANGLE)
+set ENERGY $env(ENERGY)
+set DIR1 $env(DIR1)
+set DIR2 $env(DIR2)
+spawn bash
+send "cd $PANDA_DIR;. $PANDA_DIR/PandaRoot/build/config.sh\n"
+send "cd $PANDA_DIR/workspace/plot\n"
+send "root -l Shower_instance_two.C'(\"${DIR1}\",\"${DIR2}\",$ENERGY,$NOANGLE)'\n"
+send "sleep(2)\n"
+send ".q\n"
+send "exit\n"
+interact
